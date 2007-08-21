@@ -3,11 +3,11 @@
 
 %define name bigforth
 %define version 2.1.1
-%define release %mkrel 2
+%define release %mkrel 3
 
 Name:         %name
 Release:      %release
-License:      GPL
+License:      GPL+
 Group:        Development/Other
 Version:      %version
 Summary:      bigForth language
@@ -21,67 +21,52 @@ BuildRoot:    %_tmppath/%name-buildroot
 %description
 bigforth is a portable implementation of the ANS Forth language.
 Its greatest advantage is the portable widget toolkit MINOS which
-builds on top of it. There are a lot of similarites with GForth btw.
+builds on top of it. There are a lot of similarites with GForth.
 
 %prep
-rm -rf $RPM_BUILD_ROOT
-
-%setup -n %name
+%setup -q -n %name
 
 %build
-
-%configure
-
+%configure2_5x
 make
 
 %install
-
 %makeinstall
 
 # icon section
-install -d %buildroot/%_miconsdir
-install -d %buildroot/%_iconsdir
-install -d %buildroot/%_liconsdir
-bzcat %SOURCE16 > %buildroot/%_miconsdir/%nami.png
-bzcat %SOURCE32 > %buildroot/%_iconsdir/%nami.png
-bzcat %SOURCE48 > %buildroot/%_liconsdir/%nami.png
-
-# debian menu file
-install -d %buildroot/%_menudir
-cat << EOF > %buildroot/%_menudir/%name
-?package(%name):command="%_bindir/%name" \
-icon="big-forth.png"  needs="text" section="More Applications/Development/Interpreters" \
-title="bigForth" longtitle="%summary - Shell" xdg="true" 
-EOF
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+bzcat %SOURCE16 > %buildroot/%_iconsdir/hicolor/16x16/apps/%nami.png
+bzcat %SOURCE32 > %buildroot/%_iconsdir/hicolor/32x32/apps/%nami.png
+bzcat %SOURCE48 > %buildroot/%_iconsdir/hicolor/48x48/apps/%nami.png
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=%{title}
-Comment=%summary - Shell
+Comment=bigForth language shell
 Exec=%{_bindir}/%{name} 
 Icon=big-forth
 Terminal=false
 Type=Application
-Categories=X-MandrivaLinux-MoreApplications-Development-Interpreters;Development
+Categories=Development;Building;Debugger;
 EOF
-
 
 %post
 %{update_menus}
+%{update_icon_cache hicolor}
 
 %postun
 %{clean_menus}
+%{clean_icon_cache hicolor}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc BUGS COPYING CREDITS README ToDo
+%doc BUGS CREDITS README ToDo
 %_bindir/*
 %_prefix/lib/%name
-%_iconsdir/*
-%_menudir/*
+%_iconsdir/hicolor/*/apps/*
 %{_datadir}/applications/mandriva-%{name}.desktop
 
