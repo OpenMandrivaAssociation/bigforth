@@ -3,7 +3,7 @@
 
 %define name bigforth
 %define version 2.1.1
-%define release %mkrel 3
+%define release %mkrel 4
 
 Name:         %name
 Release:      %release
@@ -42,11 +42,11 @@ bzcat %SOURCE48 > %buildroot/%_iconsdir/hicolor/48x48/apps/%nami.png
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
-Name=%{title}
+Name=bigForth
 Comment=bigForth language shell
 Exec=%{_bindir}/%{name} 
 Icon=big-forth
-Terminal=false
+Terminal=true
 Type=Application
 Categories=Development;Building;Debugger;
 EOF
