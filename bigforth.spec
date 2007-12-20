@@ -16,6 +16,7 @@ Source:       http://prdownloads.sf.net/%name/%name-%version.tar.bz2
 Source16:     big-forth.16.png.bz2
 Source32:     big-forth.32.png.bz2
 Source48:     big-forth.48.png.bz2
+BuildRoot:    %_tmppath/%name-buildroot
 
 %description
 bigforth is a portable implementation of the ANS Forth language.
