@@ -10,7 +10,7 @@ Release:      %release
 License:      GPL+
 Group:        Development/Other
 Version:      %version
-Summary:      bigForth language
+Summary:      Portable implementation of the ANS Forth language
 Url:	      http://bigforth.sourceforge.net/
 Source:       http://prdownloads.sf.net/%name/%name-%version.tar.bz2
 Source16:     big-forth.16.png.bz2
