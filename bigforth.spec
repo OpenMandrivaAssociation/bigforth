@@ -3,7 +3,7 @@
 
 %define name bigforth
 %define version 2.1.1
-%define release %mkrel 4
+%define release %mkrel 6
 
 Name:         %name
 Release:      %release
