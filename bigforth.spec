@@ -18,6 +18,11 @@ Source32:     big-forth.32.png.bz2
 Source48:     big-forth.48.png.bz2
 BuildRoot:    %_tmppath/%name-buildroot
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 bigforth is a portable implementation of the ANS Forth language.
 Its greatest advantage is the portable widget toolkit MINOS which
